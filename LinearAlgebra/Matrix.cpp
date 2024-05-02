@@ -20,7 +20,7 @@ Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
 
 /**
  * generate Function
- *!Currently fills matrix with fixed values
+ *!Currently fills matrix with fixed values!
 */
 void Matrix::generate() {
     data[0][0] = Fraction(2);   //2,-1,1,5,1,1,-1,-2,-1,2,2,1
