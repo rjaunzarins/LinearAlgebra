@@ -25,7 +25,7 @@ Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
 void Matrix::generate() {
     data[0][0] = Fraction(2);   //2,-1,1,5,1,1,-1,-2,-1,2,2,1
     data[0][1] = Fraction(3);
-    data[0][2] = Fraction(-4); 
+    data[0][2] = Fraction(-4); //
     data[0][3] = Fraction(5);
     data[1][0] = Fraction(3);   
     data[1][1] = Fraction(-2);
