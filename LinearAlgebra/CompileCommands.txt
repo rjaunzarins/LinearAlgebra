@@ -1,0 +1,6 @@
+Ensure you are in the correct folder
+    Workspace/LinearAlgebra/LinearAlgebra
+
+
+Compile:    g++ -std=c++20 LinAlg.cpp Matrix.cpp Fraction.cpp
+Run:        ./a.out
