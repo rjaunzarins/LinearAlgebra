@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include "Fraction.h"
+//#include "LinAlgFunctions.h" Not currently using this
 
 #include <iostream>
 
@@ -9,7 +10,7 @@ int main() {
     m.print();
 
     bool solved = false;
-    while(!solved) {    
+    while(!m.checkSolved()) {    
         m.checkX1();
         solved = m.checkSolved();
         if(solved) { break; }
@@ -19,7 +20,6 @@ int main() {
         m.checkCol2Zeros();
         m.checkX3();
         m.checkCol3Zeros();
-        solved = true;
     }
 
 

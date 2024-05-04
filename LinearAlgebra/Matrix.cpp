@@ -1,7 +1,7 @@
 #include "Matrix.h"
 
 /**
- * Default Constructor
+ ** Default Constructor
  * Generate Matrix with default size of 3 rows, 4 cols
  */
 Matrix::Matrix() {
@@ -9,7 +9,7 @@ Matrix::Matrix() {
 }
 
 /**
- * Arg Constructor
+ ** Arg Constructor
  * Generate matrix with custom size
  * @param rows number of rows in matrix
  * @param cols number of columns in matrix
@@ -19,26 +19,26 @@ Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
 }
 
 /**
- * generate Function
+ ** generate Function
  *!Currently fills matrix with fixed values!
 */
 void Matrix::generate() {
-    data[0][0] = Fraction(2);   //2,-1,1,5,1,1,-1,-2,-1,2,2,1
-    data[0][1] = Fraction(3);
-    data[0][2] = Fraction(-4); //
+    data[0][0] = Fraction(2);   //2,-1,1,5,1,1,-1,-2,-1,2,2,1 - unique
+    data[0][1] = Fraction(-1);
+    data[0][2] = Fraction(1);   //2,3,-4,5,3,-2,1,4,1,1,2,3 - unique
     data[0][3] = Fraction(5);
-    data[1][0] = Fraction(3);   
-    data[1][1] = Fraction(-2);
-    data[1][2] = Fraction(1);
-    data[1][3] = Fraction(4);
-    data[2][0] = Fraction(1);
-    data[2][1] = Fraction(1);
+    data[1][0] = Fraction(1);   //1,1,5,3,0,1,3,-1,1,2,8,3 - no solutions
+    data[1][1] = Fraction(1);
+    data[1][2] = Fraction(-1);
+    data[1][3] = Fraction(-2);
+    data[2][0] = Fraction(-1);
+    data[2][1] = Fraction(2);
     data[2][2] = Fraction(2);
-    data[2][3] = Fraction(3);
+    data[2][3] = Fraction(1);
 }
 
 /**
- * setElement Function
+ ** setElement Function
  * Sets an element to the passed value
  * @param row The row to modify
  * @param col The column to modify
@@ -49,7 +49,7 @@ void Matrix::setElement(int row, int col, Fraction val) {
 }
 
 /**
- * getElement Function
+ ** getElement Function
  * Returns the value in specified element
  * @param row The row to get value from
  * @param col The column to get value from
@@ -60,7 +60,7 @@ Fraction Matrix::getElement(int row, int col) {
 }
 
 /**
- * getRows Function
+ ** getRows Function
  * Returns the number of rows in the matrix
  * @return The number of rows
 */
@@ -69,7 +69,7 @@ int Matrix::getRows() {
 }
 
 /**
- * getCols Function
+ ** getCols Function
  * Returns the number of cols in the matrix
  * @return The number of cols
 */
@@ -78,7 +78,7 @@ int Matrix::getCols() {
 }
 
 /**
- * print Function
+ ** print Function
  * Prints the array
 */
 void Matrix::print() {
@@ -92,7 +92,7 @@ void Matrix::print() {
 }
 
 /**
- * reset Function
+ ** reset Function
  * Resets all values in matrix to 0
 */
 void Matrix::reset() {
@@ -104,7 +104,7 @@ void Matrix::reset() {
 }
 
 /**
- * reduceRow Function
+ ** reduceRow Function
  * 
 */
 void Matrix::reduceRow(int reduceRow, int reduceByRow, Fraction multiple) {
@@ -116,45 +116,17 @@ void Matrix::reduceRow(int reduceRow, int reduceByRow, Fraction multiple) {
     }
 }
 
-// /**
-//  * checkRowSolved Function
-// */
-// void Matrix::checkRowSolved() {
-
-// }
-
-// bool Matrix::isLeadingElement1(int row) {
-//     int one = 0;
-//     int greater = 0;
-//     for (size_t i = 0; i < cols; ++i) {
-//         if(data[row][i] == 1)
-//             ++one;
-//         if(data[row][i] > 1)
-//             ++greater;
-//         if(one == 1) { return true; }
-//         if(greater == 1) { return false; }
-//     }
-//     return false;
-// }
-
-// int Matrix::getLeading1Element(int row) {
-//     for (size_t i = 0; i < cols; ++i) {
-//         if(data[row][i] == 1)
-//             return i;
-//     }
-//     return -1;
-// }
-
-// int Matrix::getLeadingElement(int row) {
-//     for (size_t i = 0; i < cols; ++i) {
-//         if(data[row][i] != 0)
-//             return i;
-//     }
-//     return -1;
-// }
+/**
+ ** checkRowSolved Function
+ * Check to see if each row is solved. If solved return true
+ * @return True if all rows are solved, false otherwise
+*/
+bool Matrix::checkRowSolved() {
+    return true;
+}
 
 /**
- * checkX1 Function
+ ** checkX1 Function
  * Checks to see if data[0][0] is a 1. If it is not a 1 the function will
  * either swap the row with a row that has a 1 in first element, or will
  * reduce the row if required
@@ -201,7 +173,7 @@ void Matrix::checkX1() {
 }
 
 /**
- * checkX2 Function
+ ** checkX2 Function
  * Checks to see if data[1][1] is a 1. If it is not a 1 the function will
  * either reduce the row with row data[2][i] or will divide by itself.
 */
@@ -220,7 +192,7 @@ void Matrix::checkX2() {
 }
 
 /**
- * checkX3 Function
+ ** checkX3 Function
  * Checks to see if data[2][2] is a 1. If it is not a 1 the function will
  * divide the element by itself.
 */
@@ -232,7 +204,7 @@ void Matrix::checkX3() {
 }
 
 /**
- * checkSolved Function
+ ** checkSolved Function
 */
 bool Matrix::checkSolved() {
     if(data[2][0] == 0 && data[2][1] == 0 && data[2][2] == 0 && data[2][3] != 0) {
@@ -256,25 +228,204 @@ bool Matrix::checkSolved() {
     else if(data[2][0] != 0 || data[2][1] != 0)
         return false;
     else
+        printSolution();
         return true;
 }
 
-// void Matrix::checkColZeros() { 
-//     for (size_t i = 0; i < rows; ++i) {
-//         if(i == 0) {
-//             checkCol1Zeros();
-//         }
-//         if(i == 2) {
-//             checkCol2Zeros();
-//         }
-//         if(i == 3) {
-//             checkCol3Zeros();
-//         }
-//     }
-// }
+/**
+ ** getSolution Function
+ * Matrix is solved, Print solution 
+*/
+void Matrix::printSolution() {
+    if(data[2][2] == 1) {
+        std::cout << "Unique Solution: \n";
+        std::cout << "X1 = " << data[0][3] << "\n";
+        std::cout << "X2 = " << data[1][3] << "\n";
+        std::cout << "X3 = " << data[2][3] << "\n";
+    }
+    else if(data[2][2] == 0) {
+        // Many Solutions
+        if(data[2][3] == 0) {
+            std::cout << "Many Solutions: \n";
+            printManySolutions();
+            
+        }
+        // No Solution
+        else
+            std::cout << "0 != " << data[2][3] << " - No Solutions\n";
+    }
+}
 
 /**
- * checkCol1Zeros Function
+ ** printManySolutions Function
+ * There are many solution - Print
+*/
+void Matrix::printManySolutions() {
+    // Row 1 - If there is no X2
+    if(data[0][1] == 0 && data[0][2] != 0) {
+        std::cout << "X1 + " << data[0][2] << "X3 = " << data[0][3];
+    }
+    
+    // Row 1 - If there is no X3
+    if(data[0][1] != 0 && data[0][2] == 0) {
+        std::cout << "X1 + " << data[0][1] << "X2 = " << data[0][3];
+    }
+    
+    // Row 1 - If there is an X2 and X3
+    if(data[0][1] != 0 && data[0][2] != 0) {
+        std::cout << "X1 + " << data[0][1] << "X2 + " << (data[0][2]) * -1 << "X3 = " << data[0][3];
+    }
+    
+    // Row 2 - If X2 = 1 & X3 = 0
+    if(data[1][1] == 1 && data[1][2] == 0) {
+        std::cout << "X2 = " << data[1][3];
+    }
+    
+    //Row 2 - If X2 = 1 & X3 != 0
+    if(data[1][1] == 1 && data[1][2] != 0) {
+        std::cout << "X2 + " << data[1][2] << "X3 = " << data[1][3];
+    }
+    
+    // Row 2 - If X3 = 1
+    if(data[1][1] == 0 && data[1][2] == 1) {
+        std::cout << "X3 = " << data[1][3];
+    }
+    manySolSimpR1();
+    manySolSimpR2();
+    letREqual();
+}
+
+/**
+ ** manySolSimpR1 Function
+ * 
+*/
+void Matrix::manySolSimpR1() {
+    
+    std::cout << "\nSolve for X: ";
+    
+    // X1 == 1, X2 != 0, X3 == 0
+    if(data[0][1] != 0 && data[0][2] == 0) {
+        if(data[0][3] > 0) {
+            if(data[0][1] > 1 || data[0][1] < -1)
+                std::cout << "X1 = " << data[0][1] * -1 << "X2 + " << data[0][3];
+            else if(data[0][1] == 1) 
+                std::cout << "X1 = -X2 + " << data[0][3];
+            else if(data[0][1] == -1) 
+                std::cout << "X1 = X2 + " << data[0][3];
+            
+        }
+        else if(data[0][3] < 0) {
+            if(data[0][1] > 1 || data[0][1] < -1)
+                std::cout << "X1 = " << data[0][1] * -1 << "X2 - " << data[0][3] * -1;
+            else if(data[0][1] == 1)
+                std::cout << "X1 = -X2 + " << data[0][3];
+            else if(data[0][1] == -1) 
+                std::cout << "X1 = X2 + " << data[0][3];
+        }
+        else
+            std::cout << "X1 = " << data[0][1] * -1 << "X2";
+    }
+
+    // X1 == 1, X2 == 0, X3 != 0
+    else if(data[0][1] == 0 && data[0][2] != 0) {
+        if(data[0][3] > 0) {
+            if(data[0][2] > 1 || data[0][1] < -1)
+                std::cout << "X1 = " << data[0][2] * -1 << "X3 + " << data[0][3];
+            else if(data[0][2] == 1) 
+                std::cout << "X1 = -X3 + " << data[0][3];
+            else if(data[0][2] == -1) 
+                std::cout << "X1 = X3 + " << data[0][3];
+        }
+        else if(data[0][3] < 0) {
+            if(data[0][2] > 1 || data[0][1] < -1)
+                std::cout << "X1 = " << data[0][2] * -1 << "X3 - " << data[0][3] * -1;
+            else if(data[0][2] == 1)
+                std::cout << "X1 = -X3 + " << data[0][3];
+            else if(data[0][2] == -1) 
+                std::cout << "X1 = X3 + " << data[0][3];
+        }
+        else if(data[0][3] == 0)
+            std::cout << "X1 = " << data[0][2] * -1 << "X3";
+    }
+
+    // X1 == 1, X2 == 0, X3 == 0
+    else if(data[0][1] == 0 && data[0][2] == 0) {
+        std::cout << "X1 = " << data[0][3];
+    }
+    else
+        std::cout << "Error!";
+}
+
+/**
+ ** manySolSimpR2 Function
+ * 
+*/
+void Matrix::manySolSimpR2() {
+    // X2 = 1, X3 = 0
+    if(data[1][1] == 1 && data[1][2] == 0) {
+        std::cout << "X2 = " << data[1][3];
+    }
+
+    // X2 = 1, X3 !=0
+    if(data[1][1] == 1 && data[1][2] !=0) {
+        if(data[1][3] > 0) {	
+            std::cout << "X2 = " << data[1][2] * -1 << "X3 + " << data[1][3];
+        }
+        else if(data[1][3] < 0) {
+            std::cout << "X2 = " << data[1][2] * -1 << "X3 - " << data[1][3] * -1;
+        }
+        else
+            std::cout << "X2 = " << data[1][2];
+    }
+
+    // X2 = 0, X3 = 1
+    if(data[1][1] == 0 && data[1][2] == 1) {
+        std::cout << "X3 = " << data[1][3];
+    }
+}
+
+/**
+ ** letREqual Function
+ * 
+*/
+void Matrix::letREqual() {
+    // If Row 2 X2 = 1, let X3 = r
+    if(data[1][1] == 1) {
+        std::cout << "\nLet X3 = r: ";
+        
+        if(data[0][2] == 0) {
+//			System.out.println("X1 = " + matrix[0][3]);
+//			System.out.println("X2 = " + matrix[1][2] + "r");
+            std::cout << "X3 = r";
+        }
+        else if(data[0][2] >= 1 || data[0][2] <= -1) {
+            
+        }
+    }
+    // Else, let X2 = r
+    else {
+        std::cout << "\nLet X2 = r: ";
+        
+        if(data[0][1] == 0) {
+            std::cout << "X1 = " << data[0][3];
+            std::cout << "X2 = r";
+            std::cout << "X3 = " << data[1][3];
+        }
+        else if(data[0][1] >= 1 || data[0][1] <= -1){
+            if(data[0][3] > 0)
+                std::cout << "X1 = " << data[0][1] * -1 << "r + " << data[0][3];
+            else if(data[0][3] < 0)
+                std::cout << "X1 = " << data[0][1] * -1 << "r + " << data[0][3];
+            else
+                std::cout << "X1 = " << data[0][1] * -2 << "r";
+                std::cout << "X2 = r";
+                std::cout << "X3 = " << data[1][3];
+        }
+    }
+}
+
+/**
+ ** checkCol1Zeros Function
  * Reduces elements in column 1 to zero below x1
 */
 void Matrix::checkCol1Zeros() {
@@ -287,7 +438,7 @@ void Matrix::checkCol1Zeros() {
 }
 
 /**
- * checkCol2Zeros Function
+ ** checkCol2Zeros Function
  * Reduces elements in column 2 to zero above and below x2
 */
 void Matrix::checkCol2Zeros() {
@@ -302,7 +453,7 @@ void Matrix::checkCol2Zeros() {
 }
 
 /**
- * checkCol3Zeros Function
+ ** checkCol3Zeros Function
  * Reduces elements in column 3 to zero above x3
 */
 void Matrix::checkCol3Zeros() {
@@ -317,7 +468,7 @@ void Matrix::checkCol3Zeros() {
 }
 
 /**
- * swapFraction Function
+ ** swapFraction Function
  * Swaps two fractions
  * @param f1 The first Fraction
  * @param f2 The second Fraction
@@ -329,7 +480,7 @@ void Matrix::swapFraction(Fraction &f1, Fraction &f2) {
 }
 
 /**
- * swapRows Function
+ ** swapRows Function
  * Swaps two rows
  * @param r1 The first row
  * @param r2 The second row
@@ -342,20 +493,7 @@ void Matrix::swapRows(int r1, int r2) {
 }
 
 /**
- * multiplyRow Function
- * Multiplies a row by a constant
- * @param row The row to multiply
- * @param f The constant to multiply the row by
-*/
-// void Matrix::multiplyRow(int row, Fraction f) {
-//     for(int i = 0; i < cols; ++i) {
-//         data[row][i] = data[row][i] * f;
-//         std::cout << "Multiply R" << i+1 << " By " << data[i][i] << ":\n";
-//     } 
-// }
-
-/**
- * divideRow Function
+ ** divideRow Function
  * Divides a row by a constant
  * @param row The row to divide
  * @param f The constant to divide the row by
@@ -367,16 +505,85 @@ void Matrix::divideRow(int row, Fraction f) {
     std::cout << "Divide R" << row+1 << " By " << f << ":\n";
 }
 
-/**
- * addRows Function
+/** 
+ ** addRows Function - NOT IMPLEMENTED
  * Adds a multiple of one row to another row
  * @param r1 The row to be modified
  * @param r2 The row to be multiplied and added
  * @param multiple The constant to multiply by
  * 
 */
-// void Matrix::addRows(int r1, int r2, Fraction multiple) {
-//     for(int i = 0; i < cols; ++i) {
-//         data[r1][i] = data[r1][i] + multiple * data[r2][i];
-//     } 
-// }
+void Matrix::addRows(int r1, int r2, Fraction multiple) {
+    for(int i = 0; i < cols; ++i) {
+        data[r1][i] = data[r1][i] + multiple * data[r2][i];
+    } 
+}
+
+/**
+ ** isLeadingElement Function - NOT IMPLEMENTED
+*/
+bool Matrix::isLeadingElement1(int row) {
+    int one = 0;
+    int greater = 0;
+    for (size_t i = 0; i < cols; ++i) {
+        if(data[row][i] == 1)
+            ++one;
+        if(data[row][i] > 1)
+            ++greater;
+        if(one == 1) { return true; }
+        if(greater == 1) { return false; }
+    }
+    return false;
+}
+
+/**
+ ** getLeading1Element Function - NOT IMPLEMENTED
+*/
+int Matrix::getLeading1Element(int row) {
+    for (size_t i = 0; i < cols; ++i) {
+        if(data[row][i] == 1)
+            return i;
+    }
+    return -1;
+}
+
+/**
+ ** getLeadingElement Function - NOT IMPLEMENTED
+*/
+int Matrix::getLeadingElement(int row) {
+    for (size_t i = 0; i < cols; ++i) {
+        if(data[row][i] != 0)
+            return i;
+    }
+    return -1;
+}
+
+/**
+ ** multiplyRow Function - NOT IMPLEMENTED
+ * Multiplies a row by a constant
+ * @param row The row to multiply
+ * @param f The constant to multiply the row by
+*/
+void Matrix::multiplyRow(int row, Fraction f) {
+    for(int i = 0; i < cols; ++i) {
+        data[row][i] = data[row][i] * f;
+        std::cout << "Multiply R" << i+1 << " By " << data[i][i] << ":\n";
+    } 
+}
+
+/**
+ ** checkColZeros Function - NOT IMPLEMENTED
+*/
+void Matrix::checkColZeros() { 
+    for (size_t i = 0; i < rows; ++i) {
+        if(i == 0) {
+            checkCol1Zeros();
+        }
+        if(i == 2) {
+            checkCol2Zeros();
+        }
+        if(i == 3) {
+            checkCol3Zeros();
+        }
+    }
+}

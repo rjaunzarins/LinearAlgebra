@@ -14,7 +14,7 @@ class Matrix {
         void reset();
         void print();
         void reduceRow(int reduceRow, int reduceByRow, Fraction multiple);
-        void checkRowSolved();
+        bool checkRowSolved();
         bool isLeadingElement1(int row);
         int getLeading1Element(int row);
         int getLeadingElement(int row);
@@ -33,6 +33,11 @@ class Matrix {
         void addRows(int r1, int r2, Fraction multiple);
     private:
         void generate();
+        void printSolution();
+        void printManySolutions();
+        void manySolSimpR1();
+        void manySolSimpR2();
+        void letREqual();
         Fraction data[10][10];
         int rows = 3;
         int cols = 4;
